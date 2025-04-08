@@ -1,0 +1,1 @@
+Cross-platform application meant to be a simple and easy-to-use tool for file transfer between devices.

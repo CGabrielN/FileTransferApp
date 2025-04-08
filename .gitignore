@@ -1,0 +1,135 @@
+# Build directories
+/build/
+/out/
+/bin/
+/lib/
+/Debug/
+/Release/
+/x64/
+/Win32/
+/cmake-build-*/
+/CMakeFiles/
+/CMakeCache.txt
+/CMakeScripts/
+/Testing/
+
+# IDE files
+## Visual Studio
+.vs/
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.suo
+*.user
+*.userosscache
+*.sdf
+*.opensdf
+*.VC.db
+*.VC.opendb
+ipch/
+
+## VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+## CLion
+.idea/
+*.iml
+*.iws
+*.ipr
+*.swp
+.DS_Store
+
+## Xcode
+*.xcodeproj/
+*.xcworkspace/
+xcuserdata/
+DerivedData/
+.build/
+
+# Compiled files
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.so.*
+*.dylib
+*.dll
+*.exe
+*.out
+*.app
+*.log
+*.ilk
+*.map
+*.exp
+*.pdb
+
+# CMake generated files
+cmake_install.cmake
+CTestTestfile.cmake
+Makefile
+cmake-build-debug/
+cmake-build-release/
+install_manifest.txt
+compile_commands.json
+_deps/
+
+# Generated files
+moc_*.cpp
+qrc_*.cpp
+ui_*.h
+*.qm
+
+# Qt specific
+*.pro.user
+*.pro.user.*
+*.qbs.user
+*.qbs.user.*
+*.moc
+moc_*.h
+
+# Dependency directories
+/third_party/build/
+/third_party/install/
+
+# Protocol Buffer generated files
+*.pb.h
+*.pb.cc
+
+# Testing
+/CTestTestfile.cmake
+
+# Documentation
+/docs/html/
+/docs/xml/
+/docs/latex/
+/docs/doxygen_sqlite3.db
+
+# OS specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Application specific
+*.log
+*.cache
+config.local.*
+credentials.json
+*.key
+*.pem
+
+# Temporary files
+*.swp
+*~
+*.tmp
+*.bak
