@@ -45,14 +45,6 @@ namespace core {
               m_discoveryPort(discoveryPort), m_announcementInterval(announcementInterval),
               m_timeoutInterval(timeoutInterval), m_peerId(generatePeerId()),
               m_displayName("User on " + m_platform->getName()), m_running(false) {
-
-        if (discoveryPort == 34567) {
-            // Use a random port between 40000 and 49999
-            std::random_device rd;
-            std::mt19937 gen(rd());
-            std::uniform_int_distribution<> dist(40000, 49999);
-            m_discoveryPort = dist(gen);
-        }
         SPDLOG_DEBUG("DiscoveryService initialized with peer ID: {}", m_peerId);
     }
 

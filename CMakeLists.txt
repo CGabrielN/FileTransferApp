@@ -19,8 +19,13 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-# Set QT Path
-set(Qt6_DIR "C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6")
+if(WIN32)
+    # Set QT Path
+    set(Qt6_DIR "C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6")
+else()
+    # let CMake find Qt6
+endif ()
+
 
 # Detect platform
 if(WIN32)

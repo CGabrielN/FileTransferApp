@@ -4,12 +4,13 @@
 #include <spdlog/sinks/rotating_file_sink.h>
 #include <spdlog/sinks/daily_file_sink.h>
 #include <filesystem>
+#include <iostream>
 
 #ifdef PLATFORM_WINDOWS
 
 #include <windows.h>
 #include <shlobj.h>
-#include <iostream>
+
 
 #elif defined(PLATFORM_MACOS) || defined(PLATFORM_LINUX)
 #include <pwd.h>

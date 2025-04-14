@@ -7,6 +7,7 @@
 #include <filesystem>
 #include <memory>
 #include <unistd.h>
+#include <net/if.h>
 #include <ifaddrs.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
