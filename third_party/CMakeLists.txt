@@ -83,13 +83,30 @@ endif()
 
 # OpenSSL for encryption (if enabled)
 if(ENABLE_ENCRYPTION)
-    find_package(OpenSSL)
-    if(OpenSSL_FOUND)
-        message(STATUS "Using OpenSSL for encryption")
-        add_definitions(-DHAS_OPENSSL)
-    else()
-        message(STATUS "OpenSSL not found. Building with limited encryption support.")
-    endif()
+    message(STATUS "Fetching MbedTLS for encryption")
+
+    FetchContent_Declare(
+            mbedtls
+            GIT_REPOSITORY https://github.com/Mbed-TLS/mbedtls.git
+            GIT_TAG v3.4.0
+    )
+
+    # Configure MbedTLS options
+    set(ENABLE_PROGRAMS OFF CACHE BOOL "Disable programs" FORCE)
+    set(ENABLE_TESTING OFF CACHE BOOL "Disable testing" FORCE)
+
+    FetchContent_MakeAvailable(mbedtls)
+
+    # Create OpenSSL-compatible interface
+    add_library(openssl_compat INTERFACE)
+    target_link_libraries(openssl_compat INTERFACE mbedtls mbedcrypto mbedx509)
+    target_include_directories(openssl_compat INTERFACE ${mbedtls_SOURCE_DIR}/include)
+
+    # Define compatible target names
+    add_library(OpenSSL::SSL ALIAS openssl_compat)
+    add_library(OpenSSL::Crypto ALIAS mbedcrypto)
+
+    add_definitions(-DHAS_MBEDTLS)
 endif()
 
 # zlib for compression
@@ -122,8 +139,8 @@ if(PROTOBUF_ENABLED AND (Protobuf_FOUND OR protobuf_FOUND))
     target_link_libraries(third_party_libs INTERFACE protobuf::libprotobuf)
 endif()
 
-if(ENABLE_ENCRYPTION AND OpenSSL_FOUND)
-    target_link_libraries(third_party_libs INTERFACE OpenSSL::SSL OpenSSL::Crypto)
+if(ENABLE_ENCRYPTION)
+    target_link_libraries(third_party_libs INTERFACE openssl_compat)
 endif()
 
 # Export all variables to parent scope

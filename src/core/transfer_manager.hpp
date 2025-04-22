@@ -91,8 +91,20 @@ namespace core{
         mutable std::mutex m_transfersMutex;
         std::map<std::string, std::shared_ptr<TransferInfo>> m_transfers;
 
+        // Store file data during transfers
+        mutable std::mutex m_transferDataMutex;
+        std::unordered_map<std::string, std::vector<std::vector<uint8_t>>> m_transferData;
+        std::unordered_map<std::string, int> m_transferChunksReceived;
+
+        // Encryption settings
+#ifdef ENABLE_ENCRYPTION
+        bool m_encryptionEnabled = false;
+        std::string m_encryptionPassword;
+#endif
+
         TransferStatusCallback m_statusCallback;
         TransferRequestCallback m_requestCallback;
+
 
         /**
          * Handle incoming data from a peer
@@ -173,7 +185,7 @@ namespace core{
          * @param bytesTransferred The number of bytes transferred
          */
         void updateTransferProgress(const std::string& transferId,
-                                    std::uintmax_t bytesTransfered);
+                                    std::uintmax_t bytesTransferred);
 
         /**
          * Generate a unique transfer ID
@@ -283,6 +295,24 @@ namespace core{
          * @param directory Path to the directory
          */
         void setDefaultDownloadDirectory(const std::string& directory);
+
+        /**
+         * Enable or disable file encryption
+         * @param enabled True to enable encryption, false to disable
+         */
+        void setEncryptionEnabled(bool enabled);
+
+        /**
+         * Check if encryption is enabled
+         * @return True if encryption is enabled, false otherwise
+         */
+        bool isEncryptionEnabled() const;
+
+        /**
+         * Set the encryption password
+         * @param password Password to use for encryption
+         */
+        void setEncryptionPassword(const std::string& password);
 
     };
 
